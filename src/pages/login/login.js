@@ -51,18 +51,19 @@ export default () => {
   btnGoogle.addEventListener('click', (e) => {
     e.preventDefault();
     loginGoogle()
-      .then((result) => {
+      .then(() => {
         // const credential = GoogleAuthProvider.credentialFromResult(result);
         // const token = credential.accessToken;
         // const user = result.user;
         window.location.hash = '#home';
       })
-      .catch((error) => {
+      .catch(() => {
+        // eslint-disable-next-line no-alert
         alert('Login não foi possível tente novamente.');
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
         // The email of the user's account used.
-        const email = error.customData.email;
+        // const email = error.customData.email;
         // The AuthCredential type that was used.
         // const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
@@ -74,10 +75,12 @@ export default () => {
     loginUser(email.value, password.value)
       .then((userCredential) => {
         const user = userCredential.user;
+        // eslint-disable-next-line no-console
         console.log(user);
         window.location.hash = '#home';
       })
       .catch(() => {
+        // eslint-disable-next-line no-alert
         alert('Email ou senha inválidos');
       });
   });
