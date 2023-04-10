@@ -1,7 +1,13 @@
+@media screen and (max-width: 1025px) {
+#logoImagemDesktop{
+  display: none;
+}
+
 body{
   background-color: #F7C097;
 }
-#logoImagem{  
+
+#logoImagemMobile{  
     border-radius: 100%;
     width: 200px;
     display: flex;
@@ -36,6 +42,7 @@ body{
   display: flex;
   flex-direction: column;
 }
+
 .inputs{
   display: flex;
   justify-content: center;
@@ -58,3 +65,83 @@ body{
     font-size: 15px;
     font-weight: bold;
 }
+}
+
+/*       DESKTOP     */
+@media screen and (min-width: 1024px) {
+  #logoImagemMobile{
+    display: none;
+  }
+
+  #logoImagemDesktop{
+    width: 400px;
+    margin-left: -50px;
+  }
+
+  body{
+    background-color: #F7C097;
+  }
+
+  .verticalCadastro{
+    border-left: 2px solid #3A7B50;
+    height: 500px;
+    margin-left: -300px;
+  }
+
+  #bordaCadastro{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: white;
+    width: 110%;
+    height: 420px;
+    padding-bottom: 5%;
+    padding-top: 50px;
+    margin-left: -6px;
+}
+
+.texto{
+  color:#EB5F07;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  align-items: center;
+  margin-left: 10px;
+  font-size: 20px;
+  margin-left: -200px;
+}
+
+.caixaTextos{
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs{
+  display: flex;
+  justify-content: center;
+  border-radius:7px;
+  padding: 12px;
+  width: 350px;
+  border-style: solid;
+  border-color: #3A7B50;
+  margin-left: -200px;
+}
+
+.cadastrar{
+  background:#EB5F07;
+  border-radius: 7px;
+  border-style: none;
+  padding: 10px;
+  width: 150px;
+  margin-left: 18%;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: -100px;
+}
+
+}
+
+
+  

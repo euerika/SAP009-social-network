@@ -3,8 +3,10 @@ import { cadastrar } from '../../lib/api';
 export default () => {
   const container = document.createElement('div');
   const template = ` 
-  <img id="logoImagem" src="imagens/logoImagem.jpeg">
+  <img id="logoImagemMobile" src="imagens/logoImagem.jpeg">
   <section id="bordaCadastro">
+  <img id="logoImagemDesktop" src="imagens/logoImagem.jpeg">
+  <div class= "verticalCadastro"></div> 
    <form class = caixaTextos>
     <label for="nomesobrenome" class="texto">Nome e sobrenome</label><br>
     <input type="text" id="nomesobrenome" class= "inputs" required placeholder="Nome e sobrenome">

@@ -5,7 +5,7 @@ export default () => {
   const template = ` 
   <header>  
     <div class="containerHome">
-      <nav>
+      <nav class='versaoMobileNav'>
         <div class="icones">
           <i class="fa-solid fa-house"></i>
         </div>
@@ -20,6 +20,19 @@ export default () => {
   </header>
     <section id="bordaCadastroHome">
     <img id="logoTexto" src="imagens/logo1.png.png">
+    <img id='logoPgHome' src='imagens/Logo.png.png'>
+      <nav class='vesaoDesktopNav'>
+        <div class="icones">
+          <i class="fa-solid fa-house"></i>
+        </div>
+        <div class="icones">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <div class="icones">
+          <i class="fa-solid fa-plus"></i>
+        </div>
+      </nav>
+    <div class= "verticalHome"></div> 
     <img id="usuarioGato" src="imagens/usuarioGato.png">
     <p id="nomeUsuario">Nome do Usuário</p>
     <textArea id="areaTexto" rows = "15" cols = "15" name="textoPostagem">Compartilhe com seus amigos como você está se sentindo hoje!
@@ -29,6 +42,14 @@ export default () => {
     </section>  
   `;
   container.innerHTML = template;
+  const btnPost = container.querySelector('#posts');
+  btnPost.addEventListener('click', (e) => {
+    e.preventDefault();
+    listarPosts();
+    function postar() {
+
+    }
+  });
   //  getAuth user
   return container;
 };

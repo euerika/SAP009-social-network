@@ -1,9 +1,19 @@
+@media screen and (max-width: 1025px) {
+
+#logoPgHome{
+    display: none;
+}
+
+.vesaoDesktopNav{
+    display: none;
+}
+
 body{
     background-color: #F7C097;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-nav{
+.versaoMobileNav{
     color: white;
     display: flex;
     justify-content: flex-end;
@@ -58,4 +68,85 @@ nav{
     border-radius: 150px;
     padding: 8px;
 }
+}
 
+/*       DESKTOP     */
+@media screen and (min-width: 1024px) {
+
+#bordaCadastroHome{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: white;
+    width: 100%;
+    height: 450px;
+    padding-top: 30px;
+    align-items: center;
+    box-sizing: border-box;
+    position: absolute;
+    margin-left: -8px;
+}
+
+.versaoMobileNav{
+    display: none;
+}
+
+#bordaCadastroHome{
+    width: 100%;
+    height: 500px;
+    margin-top: 60px;
+    color: white;
+}
+
+#logoTexto{
+    display: none;
+}
+
+.verticalHome{
+    border-left: 1.5px solid #3A7B50;
+    height: 430px;
+    margin-left: -400px;
+}
+
+#usuarioGato{
+    width: 200px;
+    border-radius: 150px;
+    height: 200px;
+    margin-left: -600px;
+}
+
+#logoPgHome{
+    width: 300px;
+    margin-left: -100px;
+    margin-top: -40px;
+}
+
+.icones{
+    background-color: #3A7B50;
+    border-radius: 150px;
+    padding: 15px;
+}
+
+.vesaoDesktopNav{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: -300px;
+    font-size: 20px;
+}
+
+#nomeUsuario{
+    font-size: 20pt;
+    margin-left: -600px;
+}
+
+#areaTexto{
+    margin-left: -700px;
+    margin-top: 300px;
+    width: 300px;
+    height: 100px;
+    margin-right: 500px;
+}
+
+}
