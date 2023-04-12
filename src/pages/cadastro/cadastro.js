@@ -31,17 +31,19 @@ export default () => {
   container.innerHTML = template;
 
   const btn = container.querySelector('#btnCadastrar');
-  // console.log(btn);
   const email = container.querySelector('#e-mail');
   const usuario = container.querySelector('#usuario');
   const senha = container.querySelector('#senhas');
   btn.addEventListener('click', (e) => {
     e.preventDefault();
-    // console.log('submeter o form');
-    // console.log(email.value);
-    // console.log(usuario.value);
-    // console.log(senha.value);
-    cadastrar(usuario.value, email.value, senha.value);
+    cadastrar(usuario.value, email.value, senha.value)
+      .then(() => {
+        alert('Seu cadastro foi realizado com sucesso!');
+        window.location.hash = '#login';
+      })
+      .catch(() => {
+        alert('Falha ao cadastrar, por favor verifique os dados digitados');
+      });
   });
   return container;
 };

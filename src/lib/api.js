@@ -1,51 +1,25 @@
 /* eslint-disable no-alert */
 import {
-  getAuth, createUserWithEmailAndPassword, updateProfile,
-  signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,
-
+  getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged,
+  signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, query, onSnapshot, getDocs } from 'firebase/firestore';
+import {
+  getFirestore, collection, getDocs, addDoc, query,
+} from 'firebase/firestore';
 import firebaseConfig from './firebaseConfig';
+
 const firebaseApp = initializeApp(firebaseConfig);
 
 const db = getFirestore(firebaseApp);
 
-export async function listarPosts() {
-  const colecao = await getDocs (collection(db,'Posts'));
-  colecao.forEach((post) => {
-    console.log('=>', post.data());
-  });
-  // const colecao = collection(db, 'Posts').get();
-  // const A = query(colecao);
-  console.log(colecao);
-  // db.collection('Posts').get().then(querySnapshot => {
-  //   querySnapshot.forEach(doc => {
-  //     console.log(doc.id, '=>', doc.data());
-  //   });
-  // });
-  // const posts = onSnapshot(doc(db, 'Posts', 'DRsNNiRch7gIh8PEmCG9'), (post) => {
-  //     console.log('Current data:', post.data());
-  //   });
-}
-
 //  função para criar cadastro
 export function cadastrar(name, email, senha) {
-  // console.log(firebaseApp);
   const auth = getAuth(firebaseApp);
-  // console.log('teste');
   return createUserWithEmailAndPassword(auth, email, senha)
-    .then(() => {
-      updateProfile(auth.currentUser, {
-        displayName: name,
-      });
-      // console.log(auth.currentUser);
-      alert('Seu cadastro foi realizado com sucesso!');
-      window.location.hash = '#login';
-    })
-    .catch(() => {
-      alert('Falha ao cadastrar, por favor verifique os dados digitados');
-    });
+    .then(() => updateProfile(auth.currentUser, {
+      displayName: name,
+    }));
 }
 
 // função de login do usuário
@@ -66,8 +40,76 @@ export function loginGoogle() {
     });
 }
 
-// export const sair = signOut(auth).then(() => {
-//   // Sign-out successful.
-// }).catch((error) => {
-//   // An error happened.
+// função manter logado
+export function mantemLogado(callback) {
+  const auth = getAuth(firebaseApp);
+  onAuthStateChanged(auth, callback);
+}
+
+// função deslogar
+export function deslogar() {
+  const auth = getAuth();
+  signOut(auth)
+    .then(() => {
+    })
+    .catch(() => {
+    });
+}
+
+export async function pegarPosts() {
+  const db = getFirestore(firebaseApp);
+  const pesquisa = query(collection(db, 'posts'));
+
+  const querySnapshot = await getDocs(pesquisa);
+  const posts = [];
+  querySnapshot.forEach((doc) => {
+    posts.push({ id: doc.id, ...doc.data() });
+  });
+  return posts;
+}
+
+// função para adicionar itens no banco
+export async function criandoPost(txt) {
+  const db = getFirestore(firebaseApp);
+  const auth = getAuth(firebaseApp);
+
+  try {
+    const postRef = collection(db, 'posts');
+    const dataCriaçãoPost = Date.now();
+    const dataAtual = new Date(dataCriaçãoPost);
+
+    const dataFormatada = dataAtual.toLocaleDateString();
+    const postagem = await addDoc(postRef, {
+      nome: auth.currentUser.displayName,
+      autor: auth.currentUser.uid,
+      texto: txt,
+      data: dataFormatada,
+      like: [],
+    });
+    console.log('Document written with ID: ', postagem.id);
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  }
+}
+
+// função para criar uma postagem
+
+// função listagem de post
+// export async function listarPosts() {
+// const colecao = await getDocs(collection(db, 'Posts'));
+// eslint-disable-next-line no-unused-vars
+// colecao.forEach((post) => {
+// console.log('=>', post.data());
 // });
+// const colecao = collection(db, 'Posts').get();
+// const A = query(colecao);
+// console.log(colecao);
+// db.collection('Posts').get().then(querySnapshot => {
+//   querySnapshot.forEach(doc => {
+//     console.log(doc.id, '=>', doc.data());
+//   });
+// });
+// const posts = onSnapshot(doc(db, 'Posts', 'DRsNNiRch7gIh8PEmCG9'), (post) => {
+//     console.log('Current data:', post.data());
+//   });
+// }

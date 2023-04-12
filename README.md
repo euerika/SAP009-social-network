@@ -55,9 +55,9 @@ Quando estavamos satisfeitas com as páginas planejadas para mobile, então plan
 
 ![FeedDesktop](https://user-images.githubusercontent.com/110473504/230809090-926d417c-87d6-45fb-a074-d8b3b04353aa.png)
 
-# 4. Testes Unitários
+## 4. Testes Unitários
 
-# 5. Técnicas e técnologias utilizadas
+## 5. Técnicas e técnologias utilizadas
 
 * HTML;
 * CSS;
@@ -68,12 +68,12 @@ Quando estavamos satisfeitas com as páginas planejadas para mobile, então plan
 * SPA;
 * Firebase e Firestore.
 
- # 6. Pessoas desenvolvedoras
+ ## 6. Pessoas desenvolvedoras
 
  * Carolina Mariotto de Almeida Santos (https://github.com/anilorac93);
  * Danila Ramos (https://github.com/DanilaRamos);
  * Erika Soares dos Santos (https://github.com/euerika).
 
- # 7. Link de acesso ao site
+ ## 7. Link de acesso ao site
 
 
