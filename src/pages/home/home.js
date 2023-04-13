@@ -26,6 +26,7 @@ export default () => {
     </textArea> 
 
     <button id='posts'>Posts</button>
+    
     </section>  
   `;
   container.innerHTML = template;
