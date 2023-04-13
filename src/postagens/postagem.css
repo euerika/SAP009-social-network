@@ -1,0 +1,96 @@
+.post{
+    display: flex;
+    flex-direction: column;
+    margin-top: 7px;
+    border: 2px solid #5E6697;
+    width: 350px;
+    height: 150px;
+    margin-left: 80px;
+    border-radius: 12px;
+}
+
+#nomePost{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+#textoPostado{
+   margin-left:  30px;
+   margin-top: 15px;
+   display: flex;
+   word-wrap: break-word;
+}
+
+#btn-like{
+    border: none;
+    background-color: white;
+    margin-top: 45px;
+    padding: 6px;
+}
+
+#btn-deletar{
+    border: none;
+    background-color: white;
+    margin-top: -35px;
+    padding: 5px;
+}
+
+#btn-editar{
+    border: none;
+    background-color: white;
+    margin-top: -35px;
+    padding: 5px;
+}
+
+i{
+    font-size: 20px;
+    color: #3A7B50;
+}
+
+.post-actions{
+    display:flex;
+    flex-direction: row-reverse;
+}
+
+/*       DESKTOP     */
+@media screen and (min-width: 1024px) {
+
+.post{
+    display: flex;
+    flex-direction: column;
+    margin-top: 7px;
+    border: 2px solid #5E6697;
+    width: 1000px;
+    height: 100px;
+    margin-left: 300px;
+    border-radius: 12px;
+}
+
+#btn-like{
+    border: none;
+    background-color: white;
+    margin-top: 30px;
+}
+
+#btn-deletar{
+    border: none;
+    background-color: white;
+}
+
+#btn-editar{
+    border: none;
+    background-color: white;
+}
+
+i{
+    font-size: 20px;
+    color: #3A7B50;
+}
+
+.post-actions{
+    display:flex;
+    flex-direction: row-reverse;
+}
+}
+
+
