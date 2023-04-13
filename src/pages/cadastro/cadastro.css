@@ -3,10 +3,6 @@
   display: none;
 }
 
-body{
-  background-color: #F7C097;
-}
-
 #logoImagemMobile{  
     border-radius: 100%;
     width: 200px;
@@ -76,10 +72,6 @@ body{
   #logoImagemDesktop{
     width: 400px;
     margin-left: -50px;
-  }
-
-  body{
-    background-color: #F7C097;
   }
 
   .verticalCadastro{

@@ -1,51 +1,33 @@
 // import { async } from 'regenerator-runtime';
+import { getAuth } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
 import {
   deslogar, mantemLogado, pegarPosts, criandoPost,
 } from '../../lib/api';
+import post from '../../postagens/postagem';
+import firebaseConfig from '../../lib/firebaseConfig';
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
 
 export default () => {
   const container = document.createElement('div');
   const template = ` 
   <header> 
-    <div> 
-      <button id="logout" class="logout">
-        <i class="fa-solid fa-right-from-bracket"></i>
-      </button>
-    </div>
-    <div class="containerHome">
-      <nav class='versaoMobileNav'>
-        <div class="icones">
-          <i class="fa-solid fa-house"></i>
-        </div>
-        <div class="icones">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-        <div class="icones">
-          <i class="fa-solid fa-plus"></i>
-        </div>
-      </nav>
+    <div id="bolinha">
+      <div id="logout" class="logout">
+        <i id="voltar" class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i>
+      </div>
     </div>
   </header>
     <section id="bordaCadastroHome">
     <img id="logoTexto" src="imagens/logo1.png.png">
     <img id='logoPgHome' src='imagens/Logo.png.png'>
-      <nav class='vesaoDesktopNav'>
-        <div class="icones">
-          <i class="fa-solid fa-house"></i>
-        </div>
-        <div class="icones">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-        <div class="icones">
-          <i class="fa-solid fa-plus"></i>
-        </div>
-      </nav>
-    <div class= "verticalHome"></div> 
-    <img id="usuarioGato" src="imagens/usuarioGato.png">
-    <p id="nomeUsuario">Nome do Usuário</p>
-    <textArea id="areaTexto" rows = "15" cols = "15" name="textoPostagem">Compartilhe com seus amigos como você está se sentindo hoje!
+    <p id="nomeUsuario">@${auth.currentUser}</p>
+    <textArea id="areaTexto" maxlength="140" name="textoPostagem" wrap="hard">
     </textArea> 
-    <button id='posts'>Posts</button>
+    <button id='posts'>Postar</button>
+    <div id='post-area'></div>
     </section>  
   `;
   container.innerHTML = template;
@@ -58,19 +40,19 @@ export default () => {
       alert('Digite algo para que seja postado!');
     }
     await criandoPost(caixaDeTexto.value);
-    const postando = await pegarPosts();
-    post(postando);
+    const posts = await pegarPosts();
+    post(posts);
   });
 
   async function listarPosts() {
-    const postando = await pegarPosts();
-    postMessage(postando);
+    const posts = await pegarPosts();
+    postMessage(posts);
   }
   listarPosts();
 
-  const logout = container.querySelector('#logout');
+  // função para deslogar
+  const logout = container.querySelector('#bolinha');
   logout.addEventListener('click', () => {
-  // console.log('deslogou');
     deslogar(mantemLogado);
     window.location.hash = '#login';
   });

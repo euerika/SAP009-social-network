@@ -5,7 +5,7 @@ import {
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import {
-  getFirestore, collection, getDocs, addDoc, query,
+  getFirestore, collection, getDocs, addDoc, query, updateDoc, increment, doc, deleteDoc,
 } from 'firebase/firestore';
 import firebaseConfig from './firebaseConfig';
 
@@ -57,7 +57,6 @@ export function deslogar() {
 }
 
 export async function pegarPosts() {
-  const db = getFirestore(firebaseApp);
   const pesquisa = query(collection(db, 'posts'));
 
   const querySnapshot = await getDocs(pesquisa);
@@ -70,7 +69,6 @@ export async function pegarPosts() {
 
 // função para adicionar itens no banco
 export async function criandoPost(txt) {
-  const db = getFirestore(firebaseApp);
   const auth = getAuth(firebaseApp);
 
   try {
@@ -90,6 +88,28 @@ export async function criandoPost(txt) {
   } catch (e) {
     console.error('Error adding document: ', e);
   }
+}
+
+// função dar like
+export async function likePost(postId) {
+  const docRef = doc(db, 'posts', postId);
+  await updateDoc(docRef, {
+    like: increment(1),
+  });
+}
+
+// função editar o post
+export async function editarPost(postId, textEdit) {
+  const docRef = doc(db, 'posts', postId);
+  await updateDoc(docRef, {
+    text: textEdit,
+  });
+}
+
+// função para deletar o post
+export async function deletarPost(postId) {
+  console.log(postId);
+  await deleteDoc(doc(db, 'posts', postId));
 }
 
 // função para criar uma postagem
