@@ -1,10 +1,9 @@
 // import { async } from 'regenerator-runtime';
 import { getAuth } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import {
-  deslogar, mantemLogado, pegarPosts, criandoPost,
-} from '../../lib/api';
-import post from '../../postagens/postagem';
+// eslint-disable-next-line object-curly-newline
+import { deslogar, mantemLogado, pegarPosts, criandoPost } from '../../lib/api';
+import postagem from '../../postagens/postagem';
 import firebaseConfig from '../../lib/firebaseConfig';
 
 const firebaseApp = initializeApp(firebaseConfig);
@@ -12,34 +11,34 @@ const auth = getAuth(firebaseApp);
 
 export default () => {
   const container = document.createElement('div');
+  let displayName = '';
+  if (auth.currentUser) {
+    displayName = auth.currentUser.displayName;
+  }
   const template = ` 
-  <header> 
+  <header>  
     <div id="bolinha">
       <div id="logout" class="logout">
         <i id="voltar" class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i>
-      </div>
+        </div>
     </div>
   </header>
     <section id="bordaCadastroHome">
     <img id="logoTexto" src="imagens/logo1.png.png">
     <img id='logoPgHome' src='imagens/Logo.png.png'>
-    <p id="nomeUsuario">@${auth.currentUser}</p>
-    <textArea id="areaTexto" maxlength="140" name="textoPostagem" wrap="hard">
-    </textArea> 
-<<<<<<< HEAD
+    <p id="nomeUsuario">@${displayName}</p>
+    <textarea class="feed-text-box" id="areaTexto" placeholder="Escreva aqui um novo post..." name="story" rows="5" cols="33"></textarea>
 
-    <button id='posts'>Posts</button>
-    
-=======
+ 
     <button id='posts'>Postar</button>
     <div id='post-area'></div>
->>>>>>> 4a7d6a1c1fb09d8f1f734962f0c793574d5eda22
     </section>  
   `;
   container.innerHTML = template;
 
   const caixaDeTexto = container.querySelector('#areaTexto');
   const btnPost = container.querySelector('#posts');
+  const logout = container.querySelector('#bolinha');
 
   btnPost.addEventListener('click', async () => {
     if (caixaDeTexto.value === '') {
@@ -47,17 +46,18 @@ export default () => {
     }
     await criandoPost(caixaDeTexto.value);
     const posts = await pegarPosts();
-    post(posts);
+    postagem(posts);
   });
 
   async function listarPosts() {
     const posts = await pegarPosts();
-    postMessage(posts);
+    console.log('pegarPosts')
+    postagem(posts);
   }
   listarPosts();
 
   // função para deslogar
-  const logout = container.querySelector('#bolinha');
+
   logout.addEventListener('click', () => {
     deslogar(mantemLogado);
     window.location.hash = '#login';

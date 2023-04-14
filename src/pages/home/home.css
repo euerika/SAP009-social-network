@@ -155,7 +155,6 @@ header{
 }
 
 #areaTexto{
-    display: flex;
     width: 70%;
     height: 100px;
     border-radius: 15px;

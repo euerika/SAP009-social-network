@@ -9,7 +9,7 @@ export default (posts) => {
   const container = document.createElement('div');
   // setAttribute() adiciona um novo atributo ou modifica o valor de um
   // atributo existente num elemento específico
-  container.setAttribute('class', 'post-render');
+  container.setAttribute('class', 'posts');
   const template = posts.map((post) => `
       <div class="post">
         <p id= "nomePost">@${post.nome}</p>

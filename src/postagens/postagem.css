@@ -17,7 +17,7 @@
 #textoPostado{
    margin-left:  30px;
    margin-top: 15px;
-   display: flex;
+  
    word-wrap: break-word;
 }
 

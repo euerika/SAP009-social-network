@@ -10,12 +10,11 @@ import {
 import firebaseConfig from './firebaseConfig';
 
 const firebaseApp = initializeApp(firebaseConfig);
-
+const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 
 //  função para criar cadastro
 export function cadastrar(name, email, senha) {
-  const auth = getAuth(firebaseApp);
   return createUserWithEmailAndPassword(auth, email, senha)
     .then(() => updateProfile(auth.currentUser, {
       displayName: name,
@@ -24,14 +23,13 @@ export function cadastrar(name, email, senha) {
 
 // função de login do usuário
 export function loginUser(email, senha) {
-  const auth = getAuth(firebaseApp);
   return signInWithEmailAndPassword(auth, email, senha);
 }
 
 // função de login com Google
 export function loginGoogle() {
   const provider = new GoogleAuthProvider();
-  const auth = getAuth();
+
   return signInWithPopup(auth, provider)
     .then(() => {
 
@@ -42,13 +40,11 @@ export function loginGoogle() {
 
 // função manter logado
 export function mantemLogado(callback) {
-  const auth = getAuth(firebaseApp);
   onAuthStateChanged(auth, callback);
 }
 
 // função deslogar
 export function deslogar() {
-  const auth = getAuth();
   signOut(auth)
     .then(() => {
     })
@@ -57,9 +53,9 @@ export function deslogar() {
 }
 
 export async function pegarPosts() {
-  const pesquisa = query(collection(db, 'posts'));
+  const q = query(collection(db, 'posts'));
 
-  const querySnapshot = await getDocs(pesquisa);
+  const querySnapshot = await getDocs(q);
   const posts = [];
   querySnapshot.forEach((doc) => {
     posts.push({ id: doc.id, ...doc.data() });
@@ -69,8 +65,6 @@ export async function pegarPosts() {
 
 // função para adicionar itens no banco
 export async function criandoPost(txt) {
-  const auth = getAuth(firebaseApp);
-
   try {
     const postRef = collection(db, 'posts');
     const dataCriaçãoPost = Date.now();
@@ -78,6 +72,7 @@ export async function criandoPost(txt) {
 
     const dataFormatada = dataAtual.toLocaleDateString();
     const postagem = await addDoc(postRef, {
+      // photo: auth.currentUser.photoURL
       nome: auth.currentUser.displayName,
       autor: auth.currentUser.uid,
       texto: txt,
