@@ -14,6 +14,7 @@ export default (posts) => {
       <div class="post">
         <p id= "nomePost">@${post.nome}</p>
         <p id="textoPostado">${post.texto}</p>
+        <p id="dataPostado">${post.dataFormatada}</p>
           <div class="post-action">
           <div class="post-like">
                 <button type= "button"  class="btn-like" id="btn-like"><i class="fa-solid fa-heart" data-id="${post.id}" data-like="${post.like}"></i></button>
