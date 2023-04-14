@@ -1,190 +1,193 @@
-@media screen and (max-width: 1025px) {
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #F7C097;
+}
 
 #logoPgHome{
     display: none;
 }
 
-header{
-    background-color: #F7C097;
-    height: 70px;
-}
-
-.body{
-    background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 #bordaCadastroHome{
-    margin-top: 20px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 300px;
-    padding-top: 30px;
-    align-items: center;
-    box-sizing: border-box;
-    position: absolute;
-    margin-left: -8px;
-}
-
+    
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        background-color: white;
+        border-radius: 5%;
+        width: 100%;
+        height: 400px;
+        padding-bottom: 10%;
+    }
+    
+    /* header{
+        background-color: #F7C097;
+        height: 70px;
+    } */        
+    
+    
 #voltar{
-    color: white;
+     color: white;
 }
-
+    
 .logout{
     color: white;
     font-size: 17px;
     padding: 10px;
 } 
-
+    
 #bolinha{
     background-color: #3A7B50;
     width: 40px;
     border-radius: 150px;
     padding: 5px;
+    margin: 8px;
+}   
+.imgs{
+    width: 10px;
+    margin-left: -300px; 
+    margin-top: -90px;  
+      
+}  
+
+#nomeUsuario{
+    color: #3A7B50;
+    padding: 15px;
+    
 }
 
 #areaTexto{
     width: 95%;
-    margin-top: 5px;
+    height: 100px;
+    margin-top: -30px;
     border-radius: 7px;
     border: 2px solid #5E6697;
-    margin-left: 17px;
-    height: 100px;
+    margin-left: 5px;
     font-size: 15pt;
-}
-
-#usuarioGato{
-    width: 100px;
-    border-radius: 150px;
-    height: 100px;
-}
-
-#logoTexto{
-    display: flex;
-    width: 300px;
-}
-
-#nomeUsuario{
-    color: #3A7B50;
-}
-
-#post-area{
-    display: flex;
-    justify-content: center;
-    width: 50px;
-    height: 300px;   
-    margin-top: 300px;
-    border-radius: 10px;
-    margin-left:-800px;
-    white-space: normal; display: block;
-}
-
-#posts{
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #3A7B50;
-    color: white;
-    padding: 7px;
-    width: 200px;
-    border-radius: 9px;
-    font-size: 17px;
-    margin-top: 200px;
-    margin-left: -360px;
-}
-}
-
-/*       DESKTOP     */
-@media screen and (min-width: 1024px) {
-
-header{
-    background-color: #F7C097;
+}    
+     
     
-}
-
-#bordaCadastroHome{
-    margin-top: 7px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    background-color: white;
-    width: 100%;
-    height: 550px;
-    padding-top: 30px;
-    align-items: center;
-    box-sizing: border-box;
-    position: absolute;
-    margin-left: -8px;
-}
-
-#voltar{
-    color: white;
-}
-
-.logout{
-    color: white;
-    font-size: 17px;
-    padding: 10px;
-} 
-
-#bolinha{
-    background-color: #3A7B50;
-    width: 40px;
-    border-radius: 150px;
-    padding: 5px;
-}
-
-#logoTexto{
-    display: none;
-}
-
-#logoPgHome{
-    width: 300px;
-    margin-left: -550px;
-    margin-right: 500px;
-    margin-top: -70px;
-}
-
-#nomeUsuario{
-    font-size: 20pt;
-    margin-top: -60px;
-    margin-left: -550px;
-    margin-right: 550px;
-}
-
-#areaTexto{
-    width: 70%;
-    height: 100px;
-    border-radius: 15px;
-    border: 2px solid #5E6697;
-    margin-top: -200px;
-    margin-right: -50px;
-    margin-left: 200px;
-    font-size: 20pt;
-    white-space: normal; display: block;
-}
-
-#posts{
-    background-color: #3A7B50;
-    color: white;
-    padding: 7px;
-    width: 200px;
-    border-radius: 9px;
-    font-size: 17px;
-    margin-left: 250px;
-    margin-right: 50px;
-    margin-top: 15px;
-}
-
-#post-area{
-    display: flex;
-    width: 100%;
-    height: 300px;   
-    margin-top: 20px;
-    border-radius: 10px;
-    margin-left: 10px;
-}
-
+    #nomeUsuario{
+        color: #3A7B50;
+    }
+    
+    #post-area{
+        justify-content: center;
+        width: 50px;
+        height: 300px;   
+        margin-top: 300px;
+        border-radius: 10px;
+        margin-left:-800px;
+        white-space: normal; display: block;
+    }
+    
+    #posts{
+        display: flex;
+        flex-wrap: wrap;
+        background-color: #3A7B50;
+        color: white;
+        padding: 7px;
+        width: 200px;
+        border-radius: 9px;
+        font-size: 17px;
+        margin-top: 200px;
+        margin-left: -360px;
+    }
+    
+    
+    /*       DESKTOP     */
+    @media screen and (min-width: 1024px) {
+    
+    header{
+        background-color: #F7C097;
+        
+    }
+    
+    #bordaCadastroHome{
+        margin-top: 7px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        background-color: white;
+        width: 100%;
+        height: 550px;
+        padding-top: 30px;
+        align-items: center;
+        box-sizing: border-box;
+        position: absolute;
+        margin-left: -8px;
+    }
+    
+    #voltar{
+        color: white;
+    }
+    
+    .logout{
+        color: white;
+        font-size: 17px;
+        padding: 10px;
+    } 
+    
+    #bolinha{
+        background-color: #3A7B50;
+        width: 40px;
+        border-radius: 150px;
+        padding: 5px;
+    }
+    
+    #logoTexto{
+        display: none;
+    }
+    
+    #logoPgHome{
+        width: 300px;
+        margin-left: -550px;
+        margin-right: 500px;
+        margin-top: -70px;
+    }
+    
+    #nomeUsuario{
+        font-size: 20pt;
+        margin-top: -60px;
+        margin-left: -550px;
+        margin-right: 550px;
+    }
+    
+    #areaTexto{
+        width: 70%;
+        height: 100px;
+        border-radius: 15px;
+        border: 2px solid #5E6697;
+        margin-top: -200px;
+        margin-right: -50px;
+        margin-left: 200px;
+        font-size: 20pt;
+        white-space: normal; display: block;
+    }
+    
+    #posts{
+        background-color: #3A7B50;
+        color: white;
+        padding: 7px;
+        width: 200px;
+        border-radius: 9px;
+        font-size: 17px;
+        margin-left: 250px;
+        margin-right: 50px;
+        margin-top: 15px;
+    }
+    
+    #post-area{
+        display: flex;
+        width: 100%;
+        height: 300px;   
+        margin-top: 20px;
+        border-radius: 10px;
+        margin-left: 10px;
+    }
+    
 }
