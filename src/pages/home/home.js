@@ -12,6 +12,10 @@ const auth = getAuth(firebaseApp);
 
 export default () => {
   const container = document.createElement('div');
+  let displayName = '';
+  if (auth.currentUser) {
+    displayName = auth.currentUser.displayName;
+  }
   const template = ` 
   <header> 
     <div id="bolinha">
@@ -23,9 +27,8 @@ export default () => {
     <section id="bordaCadastroHome">
     <img id="logoTexto" src="imagens/logo1.png.png">
     <img id='logoPgHome' src='imagens/Logo.png.png'>
-    <p id="nomeUsuario">@${auth.currentUser}</p>
-    <textArea id="areaTexto" maxlength="140" name="textoPostagem" wrap="hard">
-    </textArea> 
+    <p id="nomeUsuario">@${displayName}</p>
+    <textarea class="feed-text-box" id="areaTexto" placeholder="Escreva aqui um novo post..." name="story" rows="5" cols="33"></textarea>
     <button id='posts'>Postar</button>
     <div id='post-area'></div>
     </section>  
