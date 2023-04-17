@@ -5,7 +5,8 @@ import {
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import {
-  getFirestore, collection, getDocs, addDoc, query, updateDoc, increment, doc, deleteDoc,
+  getFirestore, collection, getDocs, addDoc, query, updateDoc, doc, deleteDoc, 
+  arrayUnion, arrayRemove
 } from 'firebase/firestore';
 import firebaseConfig from './firebaseConfig';
 
@@ -52,6 +53,11 @@ export function deslogar() {
     });
 }
 
+// function converterDataPost(data) {
+//   const dataConvertida = data.toDate().toLocaleDateString()
+//   return dataConvertida;
+// }
+
 export async function pegarPosts() {
   const q = query(collection(db, 'posts'));
 
@@ -67,8 +73,8 @@ export async function pegarPosts() {
 export async function criandoPost(txt) {
   try {
     const postRef = collection(db, 'posts');
-    const dataCriaçãoPost = Date.now();
-    const dataAtual = new Date(dataCriaçãoPost);
+   
+    const dataAtual = new Date();
 
     const dataFormatada = dataAtual.toLocaleDateString();
     const postagem = await addDoc(postRef, {
@@ -89,7 +95,14 @@ export async function criandoPost(txt) {
 export async function likePost(postId) {
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
-    like: increment(1),
+    like: arrayUnion(1),
+  });
+}
+
+export async function deslikePost(postId) {
+  const docRef = doc(db, 'posts', postId);
+  await updateDoc(docRef, {
+    like: arrayRemove(1),
   });
 }
 
@@ -97,7 +110,7 @@ export async function likePost(postId) {
 export async function editarPost(postId, textEdit) {
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
-    text: textEdit,
+    texto: textEdit,
   });
 }
 
