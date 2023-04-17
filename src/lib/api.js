@@ -5,17 +5,17 @@ import {
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import {
-  getFirestore, collection, getDocs, addDoc, query, updateDoc, increment, doc, deleteDoc,
+  getFirestore, collection, getDocs, addDoc, query, updateDoc, doc, deleteDoc, 
+  arrayUnion, arrayRemove
 } from 'firebase/firestore';
 import firebaseConfig from './firebaseConfig';
 
 const firebaseApp = initializeApp(firebaseConfig);
-
+const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 
 //  função para criar cadastro
 export function cadastrar(name, email, senha) {
-  const auth = getAuth(firebaseApp);
   return createUserWithEmailAndPassword(auth, email, senha)
     .then(() => updateProfile(auth.currentUser, {
       displayName: name,
@@ -24,14 +24,13 @@ export function cadastrar(name, email, senha) {
 
 // função de login do usuário
 export function loginUser(email, senha) {
-  const auth = getAuth(firebaseApp);
   return signInWithEmailAndPassword(auth, email, senha);
 }
 
 // função de login com Google
 export function loginGoogle() {
   const provider = new GoogleAuthProvider();
-  const auth = getAuth();
+
   return signInWithPopup(auth, provider)
     .then(() => {
 
@@ -42,13 +41,11 @@ export function loginGoogle() {
 
 // função manter logado
 export function mantemLogado(callback) {
-  const auth = getAuth(firebaseApp);
   onAuthStateChanged(auth, callback);
 }
 
 // função deslogar
 export function deslogar() {
-  const auth = getAuth();
   signOut(auth)
     .then(() => {
     })
@@ -56,10 +53,15 @@ export function deslogar() {
     });
 }
 
-export async function pegarPosts() {
-  const pesquisa = query(collection(db, 'posts'));
+// function converterDataPost(data) {
+//   const dataConvertida = data.toDate().toLocaleDateString()
+//   return dataConvertida;
+// }
 
-  const querySnapshot = await getDocs(pesquisa);
+export async function pegarPosts() {
+  const q = query(collection(db, 'posts'));
+
+  const querySnapshot = await getDocs(q);
   const posts = [];
   querySnapshot.forEach((doc) => {
     posts.push({ id: doc.id, ...doc.data() });
@@ -69,15 +71,14 @@ export async function pegarPosts() {
 
 // função para adicionar itens no banco
 export async function criandoPost(txt) {
-  const auth = getAuth(firebaseApp);
-
   try {
     const postRef = collection(db, 'posts');
-    const dataCriaçãoPost = Date.now();
-    const dataAtual = new Date(dataCriaçãoPost);
+   
+    const dataAtual = new Date();
 
     const dataFormatada = dataAtual.toLocaleDateString();
     const postagem = await addDoc(postRef, {
+      // photo: auth.currentUser.photoURL
       nome: auth.currentUser.displayName,
       autor: auth.currentUser.uid,
       texto: txt,
@@ -94,7 +95,14 @@ export async function criandoPost(txt) {
 export async function likePost(postId) {
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
-    like: increment(1),
+    like: arrayUnion(1),
+  });
+}
+
+export async function deslikePost(postId) {
+  const docRef = doc(db, 'posts', postId);
+  await updateDoc(docRef, {
+    like: arrayRemove(1),
   });
 }
 
@@ -102,7 +110,7 @@ export async function likePost(postId) {
 export async function editarPost(postId, textEdit) {
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
-    text: textEdit,
+    texto: textEdit,
   });
 }
 

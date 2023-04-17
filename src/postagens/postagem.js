@@ -1,6 +1,7 @@
 import {
   deletarPost,
   likePost,
+  deslikePost,
   editarPost,
 } from '../lib/api.js';
 
@@ -9,16 +10,16 @@ export default (posts) => {
   const container = document.createElement('div');
   // setAttribute() adiciona um novo atributo ou modifica o valor de um
   // atributo existente num elemento específico
-  container.setAttribute('class', 'post-render');
+  container.setAttribute('class', 'posts');
   const template = posts.map((post) => `
       <div class="post">
         <p id= "nomePost">@${post.nome}</p>
         <p id="textoPostado">${post.texto}</p>
-        <p id="dataPostado">${post.dataFormatada}</p>
+        <p id="dataPostado">${post.data}</p>
           <div class="post-action">
           <div class="post-like">
                 <button type= "button"  class="btn-like" id="btn-like"><i class="fa-solid fa-heart" data-id="${post.id}" data-like="${post.like}"></i></button>
-                  <span class="counter-like">${post.like}</span>
+                  <span class="contar-like">${post.like}</span>
                       </div>
                       <div class="post-actions">
                       <button type="button" class="btn-editar" id="btn-editar"><i class="fa-solid fa-pen-to-square" data-id="${post.id}"></i></button>
@@ -34,21 +35,36 @@ export default (posts) => {
   postArea.appendChild(container);
 
   const btnLike = document.querySelectorAll('.btn-like');
+  
   const btnEditar = document.querySelectorAll('.btn-editar');
   const btnDeletar = document.querySelectorAll('.btn-deletar');
 
   btnLike.forEach((element) => {
     element.addEventListener('click', (e) => {
       const postId = e.target.dataset.id;
-
+ 
       likePost(postId)
         .then(() => {
           document.location.reload(true);
         }).catch(() => {
           console.log('deu ruim');
         });
+      
     });
   });
+
+  // btnLike.forEach((element) => {
+  //   element.addEventListener('click', (e) => {
+  //     const postId = e.target.dataset.id;
+
+  //     deslikePost(postId)
+  //       .then(() => {
+  //         document.location.reload(true);
+  //       }).catch(() => {
+  //         console.log('deu ruim');
+  //       });
+  //   });
+  // });
 
   // editar
   btnEditar.forEach((element) => {
