@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 #logoPgHome{
     display: none;
 }
@@ -14,22 +19,25 @@
     height: 400px;
     padding-bottom: 10%;
 }
-    
-    /* header{
+
+/*     
+    header{
         background-color: #F7C097;
-        height: 70px;
-    } */        
+        height: 10vh;
+ display: flex;
+    }      
+      */
     
     
 #voltar{
      color: white;
-     
+     font-size: 13pt;     
 }
+
     .logout{
     color: white;
     font-size: 17px;
     padding: 10px;
-    
 } 
     
 #bolinha{
@@ -48,7 +56,7 @@
 
 #nomeUsuario{
     color: #3A7B50;
-    margin-left: -50%;
+    margin-left: -45%;
     padding: 15px;
 }
 
@@ -75,9 +83,10 @@
 }
 
 #post-area{
-    width: 70%;
+    width: 55%;
     height: 40px;   
 }
+
 
 /*       DESKTOP     */
 @media screen and (min-width: 1024px) {
@@ -92,21 +101,17 @@
     }
     
     #areaTexto{
-        margin-left: -2%;
+        margin-left: -6%;
         margin-top: -50px;
-        width: 70%;
+        width: 60%;
         height: 100px;
-        
     }
    
     #nomeUsuario{
         margin-top: 280px;
-        margin-left: -35%;
     }
   
     #posts{
       margin-left: -5%;
     }
-
 }
-

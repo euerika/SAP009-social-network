@@ -4,7 +4,7 @@ import {
   likePost,
   deslikePost,
   editarPost,
-  auth
+  auth,
 } from '../lib/api.js';
 
 export default (posts) => {
@@ -55,8 +55,20 @@ export default (posts) => {
     element.addEventListener('click', (e) => {
       const postId = e.target.dataset.id;
 
-
       likePost(postId, 1)
+        .then(() => {
+          document.location.reload(true);
+        }).catch(() => {
+          console.log('deu ruim');
+        });
+    });
+  });
+
+  btnDeslike.forEach((element) => {
+    element.addEventListener('click', (e) => {
+      const postId = e.target.dataset.id;
+
+      deslikePost(postId, 1)
         .then(() => {
           document.location.reload(true);
         }).catch(() => {
