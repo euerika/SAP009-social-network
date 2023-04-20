@@ -1,5 +1,7 @@
+
 import { auth, deslogar, mantemLogado, pegarPosts, criandoPost } from '../../lib/api';
 import postagem from '../../postagens/postagem';
+
 
 export default () => {
   const container = document.createElement('div');
@@ -16,6 +18,7 @@ export default () => {
     </div>
   </header>
 
+
     <section class="bordaCadastroHome">
       <img id="logoTexto" src="imagens/logo1.png.png">
       <img id="logoPgHome" src='imagens/Logo.png.png'>
@@ -26,7 +29,8 @@ export default () => {
     
     <div id='post-area'></div>
   
-    </section>
+
+    </section>  
 
   `;
   container.innerHTML = template;
