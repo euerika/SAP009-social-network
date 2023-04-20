@@ -52,21 +52,11 @@ export default () => {
     e.preventDefault();
     loginGoogle()
       .then(() => {
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
-        // const user = result.user;
         window.location.hash = '#home';
       })
       .catch(() => {
         // eslint-disable-next-line no-alert
         alert('Login não foi possível tente novamente.');
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // The email of the user's account used.
-        // const email = error.customData.email;
-        // The AuthCredential type that was used.
-        // const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
       });
   });
 
@@ -81,7 +71,7 @@ export default () => {
       })
       .catch(() => {
         // eslint-disable-next-line no-alert
-        alert('Email ou senha inválidos');
+        alert('Preencha os campos com seu e-mail e senha por favor!');
       });
   });
 

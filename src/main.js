@@ -8,6 +8,7 @@ const main = document.querySelector('#root');
 function redirecionaUsuario(user) {
   if (user) {
     window.location.hash = '#home';
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
   } else {
     window.location.hash = '#login';
   }

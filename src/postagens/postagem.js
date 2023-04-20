@@ -1,7 +1,10 @@
+// import { async } from 'regenerator-runtime';
 import {
   deletarPost,
   likePost,
+  deslikePost,
   editarPost,
+  auth,
 } from '../lib/api.js';
 
 export default (posts) => {
@@ -9,19 +12,26 @@ export default (posts) => {
   const container = document.createElement('div');
   // setAttribute() adiciona um novo atributo ou modifica o valor de um
   // atributo existente num elemento específico
-  container.setAttribute('class', 'post-render');
+  container.setAttribute('class', 'posts');
   const template = posts.map((post) => `
       <div class="post">
         <p id= "nomePost">@${post.nome}</p>
         <p id="textoPostado">${post.texto}</p>
+        <p id="dataPostado">${post.data}</p>
           <div class="post-action">
           <div class="post-like">
-                <button type= "button"  class="btn-like" id="btn-like"><i class="fa-solid fa-heart" data-id="${post.id}" data-like="${post.like}"></i></button>
-                  <span class="counter-like">${post.like}</span>
+          ${post.like.includes(auth.currentUser.uid) ? `  <button class="btn-deslike" >
+          <i class="fa-solid fa-heart" data-id="${post.id}" data-like="${post.like}"></i>
+      </button>` : `  <button class="btn-like">
+      <i class="fa-regular fa-heart"  data-id="${post.id}" data-like="${post.like}"></i>
+       </button>`}
+          
+                  <span class="contar-like">${post.like.length}</span>
                       </div>
                       <div class="post-actions">
                       <button type="button" class="btn-editar" id="btn-editar"><i class="fa-solid fa-pen-to-square" data-id="${post.id}"></i></button>
                       <button type="button" class="btn-deletar" id="btn-deletar"><i class="fa-solid fa-trash-can" data-id="${post.id}"></i></button>
+                      
                       </div>
                   </div>
               </div>
@@ -33,6 +43,7 @@ export default (posts) => {
   postArea.appendChild(container);
 
   const btnLike = document.querySelectorAll('.btn-like');
+  const btnDeslike = document.querySelectorAll('.btn-deslike');
   const btnEditar = document.querySelectorAll('.btn-editar');
   const btnDeletar = document.querySelectorAll('.btn-deletar');
 
@@ -40,7 +51,20 @@ export default (posts) => {
     element.addEventListener('click', (e) => {
       const postId = e.target.dataset.id;
 
-      likePost(postId)
+      likePost(postId, 1)
+        .then(() => {
+          document.location.reload(true);
+        }).catch(() => {
+          console.log('deu ruim');
+        });
+    });
+  });
+
+  btnDeslike.forEach((element) => {
+    element.addEventListener('click', (e) => {
+      const postId = e.target.dataset.id;
+
+      deslikePost(postId, 1)
         .then(() => {
           document.location.reload(true);
         }).catch(() => {

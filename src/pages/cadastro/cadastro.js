@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { cadastrar } from '../../lib/api';
 
 export default () => {
