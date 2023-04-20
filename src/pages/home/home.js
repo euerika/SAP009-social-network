@@ -1,13 +1,7 @@
-// import { async } from 'regenerator-runtime';
-import { getAuth } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
-// eslint-disable-next-line object-curly-newline
-import { deslogar, mantemLogado, pegarPosts, criandoPost } from '../../lib/api';
-import postagem from '../../postagens/postagem';
-import firebaseConfig from '../../lib/firebaseConfig';
 
-const firebaseApp = initializeApp(firebaseConfig);
-const auth = getAuth(firebaseApp);
+import { auth, deslogar, mantemLogado, pegarPosts, criandoPost } from '../../lib/api';
+import postagem from '../../postagens/postagem';
+
 
 export default () => {
   const container = document.createElement('div');
@@ -23,6 +17,8 @@ export default () => {
         </div>
     </div>
   </header>
+
+
     <section class="bordaCadastroHome">
       <img id="logoTexto" src="imagens/logo1.png.png">
       <img id="logoPgHome" src='imagens/Logo.png.png'>
@@ -33,7 +29,9 @@ export default () => {
     
     <div id='post-area'></div>
   
+
     </section>  
+
   `;
   container.innerHTML = template;
 
