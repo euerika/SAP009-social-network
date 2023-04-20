@@ -5,17 +5,16 @@ import {
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import {
-  getFirestore, collection, getDocs, addDoc, query, updateDoc, increment, doc, deleteDoc,
-} from 'firebase/firestore';
+  getFirestore, collection, getDocs, addDoc, query, updateDoc, doc, deleteDoc, 
+  arrayUnion, arrayRemove } from 'firebase/firestore';
 import firebaseConfig from './firebaseConfig';
 
 const firebaseApp = initializeApp(firebaseConfig);
-
+export const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 
 //  função para criar cadastro
 export function cadastrar(name, email, senha) {
-  const auth = getAuth(firebaseApp);
   return createUserWithEmailAndPassword(auth, email, senha)
     .then(() => updateProfile(auth.currentUser, {
       displayName: name,
@@ -24,14 +23,13 @@ export function cadastrar(name, email, senha) {
 
 // função de login do usuário
 export function loginUser(email, senha) {
-  const auth = getAuth(firebaseApp);
   return signInWithEmailAndPassword(auth, email, senha);
 }
 
 // função de login com Google
 export function loginGoogle() {
   const provider = new GoogleAuthProvider();
-  const auth = getAuth();
+
   return signInWithPopup(auth, provider)
     .then(() => {
 
@@ -42,13 +40,11 @@ export function loginGoogle() {
 
 // função manter logado
 export function mantemLogado(callback) {
-  const auth = getAuth(firebaseApp);
   onAuthStateChanged(auth, callback);
 }
 
 // função deslogar
 export function deslogar() {
-  const auth = getAuth();
   signOut(auth)
     .then(() => {
     })
@@ -56,32 +52,34 @@ export function deslogar() {
     });
 }
 
-export async function pegarPosts() {
-  const pesquisa = query(collection(db, 'posts'));
+function converterDataPost() {
+  const dataConvertida = new Date().toLocaleDateString();
+  return dataConvertida;
+}
 
-  const querySnapshot = await getDocs(pesquisa);
+export async function pegarPosts() {
+  const q = query(collection(db, 'posts'));
+
+  const querySnapshot = await getDocs(q);
   const posts = [];
   querySnapshot.forEach((doc) => {
-    posts.push({ id: doc.id, ...doc.data() });
+    const dados = doc.data();
+    dados.data = converterDataPost();
+    posts.push({ id: doc.id, ...dados });
   });
   return posts;
 }
-
 // função para adicionar itens no banco
 export async function criandoPost(txt) {
-  const auth = getAuth(firebaseApp);
-
   try {
     const postRef = collection(db, 'posts');
-    const dataCriaçãoPost = Date.now();
-    const dataAtual = new Date(dataCriaçãoPost);
-
-    const dataFormatada = dataAtual.toLocaleDateString();
+    const dataAtual = new Date();
     const postagem = await addDoc(postRef, {
+      // photo: auth.currentUser.photoURL
       nome: auth.currentUser.displayName,
       autor: auth.currentUser.uid,
       texto: txt,
-      data: dataFormatada,
+      data: dataAtual,
       like: [],
     });
     console.log('Document written with ID: ', postagem.id);
@@ -94,7 +92,14 @@ export async function criandoPost(txt) {
 export async function likePost(postId) {
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
-    like: increment(1),
+    like: arrayUnion(auth.currentUser.uid),
+  });
+}
+
+export async function deslikePost(postId) {
+  const docRef = doc(db, 'posts', postId);
+  await updateDoc(docRef, {
+    like: arrayRemove(auth.currentUser.uid),
   });
 }
 
@@ -102,7 +107,7 @@ export async function likePost(postId) {
 export async function editarPost(postId, textEdit) {
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
-    text: textEdit,
+    texto: textEdit,
   });
 }
 
@@ -111,25 +116,3 @@ export async function deletarPost(postId) {
   console.log(postId);
   await deleteDoc(doc(db, 'posts', postId));
 }
-
-// função para criar uma postagem
-
-// função listagem de post
-// export async function listarPosts() {
-// const colecao = await getDocs(collection(db, 'Posts'));
-// eslint-disable-next-line no-unused-vars
-// colecao.forEach((post) => {
-// console.log('=>', post.data());
-// });
-// const colecao = collection(db, 'Posts').get();
-// const A = query(colecao);
-// console.log(colecao);
-// db.collection('Posts').get().then(querySnapshot => {
-//   querySnapshot.forEach(doc => {
-//     console.log(doc.id, '=>', doc.data());
-//   });
-// });
-// const posts = onSnapshot(doc(db, 'Posts', 'DRsNNiRch7gIh8PEmCG9'), (post) => {
-//     console.log('Current data:', post.data());
-//   });
-// }
