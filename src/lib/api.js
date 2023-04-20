@@ -6,11 +6,13 @@ import {
 import { initializeApp } from 'firebase/app';
 import {
   getFirestore, collection, getDocs, addDoc, query, updateDoc, doc, deleteDoc, 
+
   arrayUnion, arrayRemove } from 'firebase/firestore';
 import firebaseConfig from './firebaseConfig';
 
 const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
+
 const db = getFirestore(firebaseApp);
 
 
@@ -74,7 +76,9 @@ export async function pegarPosts() {
 export async function criandoPost(txt) {
   try {
     const postRef = collection(db, 'posts');
+
     const dataAtual = new Date();
+
     const postagem = await addDoc(postRef, {
       // photo: auth.currentUser.photoURL
       nome: auth.currentUser.displayName,
@@ -101,6 +105,7 @@ export async function deslikePost(postId) {
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
     like: arrayRemove(auth.currentUser.uid),
+
   });
 }
 

@@ -20,6 +20,7 @@ export default (posts) => {
         <p id="dataPostado">${post.data}</p>
           <div class="post-action">
           <div class="post-like">
+
           ${post.like.includes(auth.currentUser.uid) ? `  <button class="btn-deslike" >
           <i class="fa-solid fa-heart" data-id="${post.id}" data-like="${post.like}"></i>
       </button>` : `  <button class="btn-like">
@@ -27,6 +28,7 @@ export default (posts) => {
        </button>`}
           
                   <span class="contar-like">${post.like.length}</span>
+
                       </div>
                       <div class="post-actions">
                       <button type="button" class="btn-editar" id="btn-editar"><i class="fa-solid fa-pen-to-square" data-id="${post.id}"></i></button>
@@ -43,7 +45,9 @@ export default (posts) => {
   postArea.appendChild(container);
 
   const btnLike = document.querySelectorAll('.btn-like');
+
   const btnDeslike = document.querySelectorAll('.btn-deslike');
+
   const btnEditar = document.querySelectorAll('.btn-editar');
   const btnDeletar = document.querySelectorAll('.btn-deletar');
 
@@ -72,6 +76,34 @@ export default (posts) => {
         });
     });
   });
+
+  btnDeslike.forEach((element) => {
+    element.addEventListener('click', (e) => {
+      const postId = e.target.dataset.id;
+
+      deslikePost(postId, 1)
+
+        .then(() => {
+          document.location.reload(true);
+        }).catch(() => {
+          console.log('deu ruim');
+        });
+      
+    });
+  });
+
+  // btnLike.forEach((element) => {
+  //   element.addEventListener('click', (e) => {
+  //     const postId = e.target.dataset.id;
+
+  //     deslikePost(postId)
+  //       .then(() => {
+  //         document.location.reload(true);
+  //       }).catch(() => {
+  //         console.log('deu ruim');
+  //       });
+  //   });
+  // });
 
   // editar
   btnEditar.forEach((element) => {

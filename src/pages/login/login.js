@@ -55,7 +55,6 @@ export default () => {
         window.location.hash = '#home';
       })
       .catch(() => {
-        // eslint-disable-next-line no-alert
         alert('Login não foi possível tente novamente.');
       });
   });
