@@ -3,14 +3,12 @@ import {
   signOut, signInWithEmailAndPassword, signInWithPopup,
 } from 'firebase/auth';
 import {
-  updateDoc, deleteDoc, doc,
+  updateDoc, deleteDoc, doc, arrayUnion, arrayRemove,
 } from 'firebase/firestore';
 import {
-  cadastrar, loginUser, mantemLogado, deslogar, loginGoogle,
-  editarPost, deletarPost,
-  // likePost, deslikePost,
+  cadastrar, loginUser, mantemLogado, deslogar, loginGoogle, criandoPost,
+  editarPost, deletarPost, likePost, deslikePost,
 } from '../src/lib/api.js';
-// import { async } from 'regenerator-runtime';
 
 jest.mock('firebase/auth');
 jest.mock('firebase/firestore');
@@ -112,16 +110,49 @@ describe('deletarPost', () => {
   });
 });
 
-// describe('likePost', () => {
-//   it('a função deve adicionar um like á postagem', () => {
-//     likePost();
-//     expect()
-//   });
-// });
+describe('likePost', () => {
+  it('a função deve adicionar um like á postagem', async () => {
+    const mockDoc = 'doc';
+    const mockAuth = {
+      currentUser: {},
+    };
+    const postId = 'Id de postagem';
 
-// describe('deslikePost', () => {
-//   it('a função deve diminuir um like da postagem', () => {
-//     likePost();
-//     expect()
-//   });
-// });
+    getAuth.mockReturnValueOnce(mockAuth);
+    doc.mockReturnValueOnce(mockDoc);
+    updateDoc.mockResolvedValueOnce();
+    await likePost(postId);
+
+    expect(getAuth).toHaveBeenCalledTimes(1);
+    expect(doc).toHaveBeenCalledTimes(1);
+    expect(doc).toHaveBeenCalledWith(undefined, 'posts', postId);
+    expect(updateDoc).toHaveBeenCalledTimes(1);
+    expect(updateDoc).toHaveBeenCalledWith(mockDoc, { like: arrayUnion(mockAuth.uid) });
+  });
+});
+
+describe('deslikePost', () => {
+  it('a função deve diminuir um like da postagem', async () => {
+    const mockDoc = 'doc';
+    const postId = 'Id de postagem';
+    doc.mockReturnValueOnce(mockDoc);
+    updateDoc.mockResolvedValueOnce();
+
+    await deslikePost(postId);
+
+    expect(doc).toHaveBeenCalledTimes(1);
+    expect(doc).toHaveBeenCalledWith(undefined, 'posts', postId);
+    expect(updateDoc).toHaveBeenCalledTimes(1);
+    expect(updateDoc).toHaveBeenCalledWith(mockDoc, { like: arrayRemove() });
+  });
+});
+
+describe('criandoPost', () => {
+  it('a função deve adicionar uma postagem ao banco de dados', async () => {
+    const txt = 'texto da postagem';
+
+    await criandoPost(txt);
+
+    expect() 
+  });
+});

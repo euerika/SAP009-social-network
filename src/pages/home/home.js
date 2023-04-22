@@ -24,7 +24,7 @@ export default () => {
       <img id="logoPgHome" src='imagens/Logo.png.png'>
       <p id="nomeUsuario">@${displayName}</p>
     
-      <textarea class="feed-text-box" id="areaTexto" placeholder="Escreva aqui um novo post..." name="story" rows="5" cols="33"></textarea>
+      <textarea class="feed-text-box" id="areaTexto" placeholder="Escreva aqui um novo post..." name="story" rows="3" cols="33"></textarea>
       <button id='posts'>Postar</button>
     
       <div id='post-area'></div>

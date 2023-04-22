@@ -1,4 +1,4 @@
-// import { async } from 'regenerator-runtime';
+/* eslint-disable no-alert */
 import {
   deletarPost,
   likePost,
@@ -8,7 +8,6 @@ import {
 } from '../lib/api.js';
 
 export default (posts) => {
-  console.log(posts);
   const container = document.createElement('div');
   // setAttribute() adiciona um novo atributo ou modifica o valor de um
   // atributo existente num elemento específico
@@ -55,7 +54,7 @@ export default (posts) => {
         .then(() => {
           document.location.reload(true);
         }).catch(() => {
-          console.log('deu ruim');
+          // console.log('deu ruim');
         });
     });
   });
@@ -68,7 +67,7 @@ export default (posts) => {
         .then(() => {
           document.location.reload(true);
         }).catch(() => {
-          console.log('deu ruim');
+          // console.log('deu ruim');
         });
     });
   });
@@ -83,7 +82,7 @@ export default (posts) => {
         .then(() => {
           document.location.reload(true);
         }).catch(() => {
-          console.log('Não foi possível editar o seu post, tente novamente.');
+          alert('Não foi possível editar o seu post, tente novamente.');
         });
     });
   });
