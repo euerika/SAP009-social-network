@@ -1,25 +1,112 @@
-body{
-    background-color: #F7C097;
-    font-family: Arial, Helvetica, sans-serif;
+#logoPgHome{
+    display: none;
 }
 
-nav{
-    color: white;
+.bordaCadastroHome{
     display: flex;
-    justify-content: flex-end;
-    padding: 15px;
-    gap: 10px;
+    justify-content: center;
+    flex-direction: column;
     flex-wrap: wrap;
-    font-size: 15px;
+    align-items: center;
+    background-color: white;
+    border-radius: 5%;
+    width: 100%;
+    height: 400px;
+    padding-bottom: 10%;
 }
-
-.icones{
+    
+    /* header{
+        background-color: #F7C097;
+        height: 70px;
+    } */        
+    
+    
+#voltar{
+     color: white;
+     
+}
+    .logout{
+    color: white;
+    font-size: 17px;
+    padding: 10px;
+    
+} 
+    
+#bolinha{
     background-color: #3A7B50;
+    width: 40px;
     border-radius: 150px;
-    padding: 8px;
+    padding: 5px;
+    margin: 8px;
+    cursor: pointer;
+}   
+
+#logoTexto{
+   margin-top: -80px;
+   margin-left: -80px;
 }
 
-/* .containerHome{
-    display:flex;
-    flex-wrap: wrap;
-} */
+#nomeUsuario{
+    color: #3A7B50;
+    margin-left: -50%;
+    padding: 15px;
+}
+
+#areaTexto{
+    margin-left: -20%;
+    width: 70%;
+    height: 100px;
+    border-radius: 7px;
+    border: 2px solid #5E6697;
+    font-size: 13pt;  
+    margin-bottom: 20px; 
+}    
+
+#posts{
+    background-color: #3A7B50;
+    color: white;
+    padding: 7px;
+    width: 150px;
+    border-radius: 9px;
+    border-style: none;
+    margin-left: -20%;
+    font-size: 15pt;
+    cursor: pointer;
+}
+
+#post-area{
+    width: 70%;
+    height: 40px;   
+}
+
+/*       DESKTOP     */
+@media screen and (min-width: 1024px) {
+     #logoTexto{
+        display: none;
+    }
+    
+    #logoPgHome{
+    display: flex;   
+    width: 30%;
+    margin-top: -10px;
+    }
+    
+    #areaTexto{
+        margin-left: -2%;
+        margin-top: -50px;
+        width: 70%;
+        height: 100px;
+        
+    }
+   
+    #nomeUsuario{
+        margin-top: 280px;
+        margin-left: -35%;
+    }
+  
+    #posts{
+      margin-left: -5%;
+    }
+
+}
+
