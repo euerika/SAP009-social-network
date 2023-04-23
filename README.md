@@ -35,25 +35,11 @@ O site foi projetado com a ideia de Mobile First, então todo o planejamento foi
 ### 3.2 Desenho de protótipos
 Nós optamos por iniciar pelos protótipos de alta fidelidade em mobile:
 
-![HomeMobile](https://user-images.githubusercontent.com/110473504/230808241-52dea98f-90cc-4328-87d6-4112d85fafd2.png)
-
 (Página de login para mobile, onde é feito o login com e-mail e senha ou com a conta Google)
 
 ![LoginMobile](https://user-images.githubusercontent.com/110473504/230808361-ec4f0ede-a029-4235-abed-4eb1bcb5a83c.png)
 
-(Página inicial, onde são feitas as postagens. Pensamos ela com postagem de fotos, mas adaptamos inicialmente para postagens com textos exclusivamente, primeira versão do projeto.)
-
-![FeedMobile](https://user-images.githubusercontent.com/110473504/230808764-88fe1d05-507e-4777-a626-27d84bdb1fe5.png)
-
-(Feed para Mobile, onde serão acompanhadas as postagens feitas. Assim como a página inicial, no projeto foi adaptada para postagens de texto apenas.)
-
-Quando estavamos satisfeitas com as páginas planejadas para mobile, então planejamos como as páginas ficariam nas versões de desktop e telas grandes:
-
 ![LoginDesktop](https://user-images.githubusercontent.com/110473504/230809017-eea51017-0aa0-4545-a3cc-03dcb8246156.png)
-
-![HomeDesktop](https://user-images.githubusercontent.com/110473504/230809082-42400fa4-ac83-415d-b20d-7afd28487550.png)
-
-![FeedDesktop](https://user-images.githubusercontent.com/110473504/230809090-926d417c-87d6-45fb-a074-d8b3b04353aa.png)
 
 ## 4. Testes Unitários
 
