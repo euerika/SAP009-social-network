@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { loginUser, loginGoogle } from '../../lib/api.js';
 
 export default () => {

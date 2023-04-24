@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-shadow */
 /* eslint-disable no-alert */
 import {
@@ -81,14 +82,15 @@ export async function criandoPost(txt) {
       data: dataAtual,
       like: [],
     });
-    console.log('Documento criado com ID: ', postagem.id);
+    console.error('Documento criado com ID: ', postagem.id);
   } catch (e) {
-    alert('Erro ao adicionar um documento', e);
+    console.error('Erro ao adicionar um documento', e);
   }
 }
 
 // função dar like
 export async function likePost(postId) {
+  const auth = getAuth(firebaseApp);
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
     like: arrayUnion(auth.currentUser.uid),
@@ -97,6 +99,7 @@ export async function likePost(postId) {
 
 // função dar deslike
 export async function deslikePost(postId) {
+  const auth = getAuth(firebaseApp);
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
     like: arrayRemove(auth.currentUser.uid),

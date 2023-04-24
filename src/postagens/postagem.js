@@ -85,9 +85,8 @@ export default (posts) => {
         .then(() => {
           document.location.reload(true);
         }).catch(() => {
-          console.log('deu ruim');
+          ('Algo deu errado, tente novamente');
         });
-      
     });
   });
 
