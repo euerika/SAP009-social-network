@@ -43,6 +43,8 @@ Nós optamos por iniciar pelos protótipos de alta fidelidade em mobile:
 
 ## 4. Testes Unitários
 
+![testes](https://user-images.githubusercontent.com/110473504/234126171-2a69d91f-dcbd-49f4-96d2-7a75b0b2e3bc.png)
+
 ## 5. Técnicas e técnologias utilizadas
 
 * HTML;
