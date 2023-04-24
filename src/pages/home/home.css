@@ -19,6 +19,7 @@
     height: 400px;
     padding-bottom: 10%;
 }
+
 /*     
     header{
         background-color: #F7C097;
@@ -30,14 +31,13 @@
     
 #voltar{
      color: white;
-     font-size: 13pt;
-     
+     font-size: 13pt;     
 }
+
     .logout{
     color: white;
     font-size: 17px;
     padding: 10px;
-    
 } 
     
 #bolinha{
@@ -88,7 +88,6 @@
 }
 
 
-
 /*       DESKTOP     */
 @media screen and (min-width: 1024px) {
      #logoTexto{
@@ -106,12 +105,10 @@
         margin-top: -50px;
         width: 60%;
         height: 100px;
-        
     }
    
     #nomeUsuario{
         margin-top: 280px;
-        
     }
   
     #posts{

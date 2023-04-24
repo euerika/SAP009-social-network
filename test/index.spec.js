@@ -132,27 +132,37 @@ describe('likePost', () => {
 });
 
 describe('deslikePost', () => {
-  it('a função deve diminuir um like da postagem', async () => {
+  it('a função deve remover um like da postagem', async () => {
     const mockDoc = 'doc';
+    const mockAuth = {
+      currentUser: {},
+    };
     const postId = 'Id de postagem';
+
+    getAuth.mockReturnValueOnce(mockAuth);
     doc.mockReturnValueOnce(mockDoc);
     updateDoc.mockResolvedValueOnce();
-
     await deslikePost(postId);
 
+    expect(getAuth).toHaveBeenCalledTimes(1);
     expect(doc).toHaveBeenCalledTimes(1);
     expect(doc).toHaveBeenCalledWith(undefined, 'posts', postId);
     expect(updateDoc).toHaveBeenCalledTimes(1);
-    expect(updateDoc).toHaveBeenCalledWith(mockDoc, { like: arrayRemove() });
+    expect(updateDoc).toHaveBeenCalledWith(mockDoc, { like: arrayRemove(mockAuth.uid) });
   });
 });
 
 describe('criandoPost', () => {
   it('a função deve adicionar uma postagem ao banco de dados', async () => {
     const txt = 'texto da postagem';
+    const mockDoc = 'doc';
+    const mockAuth = 'auth';
 
+    getAuth.mockReturnValueOnce(mockAuth);
     await criandoPost(txt);
 
-    expect() 
+    expect(doc).toHaveBeenCalledWith(undefined, 'posts');
+    doc.mockReturnValueOnce(mockDoc);
+    expect(mockAuth).toHaveBeenCalledTimes(1);
   });
 });

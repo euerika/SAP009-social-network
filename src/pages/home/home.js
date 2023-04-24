@@ -15,7 +15,7 @@ export default () => {
     <div id="bolinha">
       <div id="logout" class="logout">
         <i id="voltar" class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i>
-      </div>
+        </div>
     </div>
   </header>
 
@@ -49,11 +49,13 @@ export default () => {
 
   async function listarPosts() {
     const posts = await pegarPosts();
+
     postagem(posts);
   }
   listarPosts();
 
   // função para deslogar
+
   logout.addEventListener('click', () => {
     deslogar(mantemLogado);
     window.location.hash = '#login';

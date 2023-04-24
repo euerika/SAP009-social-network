@@ -13,6 +13,7 @@ import firebaseConfig from './firebaseConfig';
 
 const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
+
 const db = getFirestore(firebaseApp);
 
 //  função para criar cadastro
@@ -70,7 +71,9 @@ export async function pegarPosts() {
 export async function criandoPost(txt) {
   try {
     const postRef = collection(db, 'posts');
+
     const dataAtual = new Date();
+
     const postagem = await addDoc(postRef, {
       nome: auth.currentUser.displayName,
       autor: auth.currentUser.uid,
@@ -97,6 +100,7 @@ export async function deslikePost(postId) {
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
     like: arrayRemove(auth.currentUser.uid),
+
   });
 }
 
