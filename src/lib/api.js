@@ -15,6 +15,7 @@ export const auth = getAuth(firebaseApp);
 
 const db = getFirestore(firebaseApp);
 
+
 //  função para criar cadastro
 export function cadastrar(name, email, senha) {
   return createUserWithEmailAndPassword(auth, email, senha)
@@ -54,12 +55,10 @@ export function deslogar() {
     });
 }
 
-
 function converterDataPost() {
   const dataConvertida = new Date().toLocaleDateString();
   return dataConvertida;
 }
-
 
 export async function pegarPosts() {
   const q = query(collection(db, 'posts'));
@@ -98,16 +97,13 @@ export async function criandoPost(txt) {
 export async function likePost(postId) {
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
-
     like: arrayUnion(auth.currentUser.uid),
-
   });
 }
 
 export async function deslikePost(postId) {
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
-
     like: arrayRemove(auth.currentUser.uid),
 
   });

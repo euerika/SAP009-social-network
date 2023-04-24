@@ -1,7 +1,8 @@
-
-import { auth, deslogar, mantemLogado, pegarPosts, criandoPost } from '../../lib/api';
+/* eslint-disable no-alert */
+import {
+  auth, deslogar, mantemLogado, pegarPosts, criandoPost,
+} from '../../lib/api';
 import postagem from '../../postagens/postagem';
-
 
 export default () => {
   const container = document.createElement('div');
@@ -18,19 +19,17 @@ export default () => {
     </div>
   </header>
 
-
     <section class="bordaCadastroHome">
       <img id="logoTexto" src="imagens/logo1.png.png">
       <img id="logoPgHome" src='imagens/Logo.png.png'>
-        <p id="nomeUsuario">@${displayName}</p>
+      <p id="nomeUsuario">@${displayName}</p>
     
-   <textarea class="feed-text-box" id="areaTexto" placeholder="Escreva aqui um novo post..." name="story" rows="5" cols="33"></textarea>
-        <button id='posts'>Postar</button>
+      <textarea class="feed-text-box" id="areaTexto" placeholder="Escreva aqui um novo post..." name="story" rows="5" cols="33"></textarea>
+      <button id='posts'>Postar</button>
     
-    <div id='post-area'></div>
+      <div id='post-area'></div>
   
-
-    </section>  
+    </section>
 
   `;
   container.innerHTML = template;
@@ -50,7 +49,7 @@ export default () => {
 
   async function listarPosts() {
     const posts = await pegarPosts();
-    console.log('pegarPosts')
+
     postagem(posts);
   }
   listarPosts();
