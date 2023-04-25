@@ -1,12 +1,13 @@
 /* eslint-disable no-alert */
 import { cadastrar } from '../../lib/api';
+import logoImagem from '../../imagens/logoImagem.jpeg';
 
 export default () => {
   const container = document.createElement('div');
   const template = ` 
-  <img id="logoImagemMobile" src="imagens/logoImagem.jpeg">
+  <img id="logoImagemMobile" src="${logoImagem}">
   <section id="bordaCadastro">
-  <img id="logoImagemDesktop" src="imagens/logoImagem.jpeg">
+  <img id="logoImagemDesktop" src="${logoImagem}">
   <div class= "verticalCadastro"></div> 
    <form class = caixaTextos>
     <label for="nomesobrenome" class="texto">Nome e sobrenome</label><br>

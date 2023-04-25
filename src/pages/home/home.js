@@ -3,6 +3,8 @@ import {
   auth, deslogar, mantemLogado, pegarPosts, criandoPost,
 } from '../../lib/api';
 import postagem from '../../postagens/postagem';
+import logoTexto from '../../imagens/logo1.png.png';
+import logoHome from '../../imagens/Logo.png.png';
 
 export default () => {
   const container = document.createElement('div');
@@ -20,8 +22,8 @@ export default () => {
   </header>
 
     <section class="bordaCadastroHome">
-      <img id="logoTexto" src="imagens/logo1.png.png">
-      <img id="logoPgHome" src='imagens/Logo.png.png'>
+      <img id="logoTexto" src="${logoTexto}">
+      <img id="logoPgHome" src='${logoHome}'>
       <p id="nomeUsuario">@${displayName}</p>
     
       <textarea class="feed-text-box" id="areaTexto" placeholder="Escreva aqui um novo post..." name="story" rows="3" cols="33"></textarea>

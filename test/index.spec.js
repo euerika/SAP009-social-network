@@ -3,7 +3,7 @@ import {
   signOut, signInWithEmailAndPassword, signInWithPopup,
 } from 'firebase/auth';
 import {
-  updateDoc, deleteDoc, doc, arrayUnion, arrayRemove,
+  updateDoc, deleteDoc, doc, arrayUnion, arrayRemove, addDoc,
 } from 'firebase/firestore';
 import {
   cadastrar, loginUser, mantemLogado, deslogar, loginGoogle, criandoPost,
@@ -154,15 +154,25 @@ describe('deslikePost', () => {
 
 describe('criandoPost', () => {
   it('a função deve adicionar uma postagem ao banco de dados', async () => {
-    const txt = 'texto da postagem';
-    const mockDoc = 'doc';
-    const mockAuth = 'auth';
+    const txt = {
+      text: 'texto',
+    };
+    const mockAuth = {
+      currentUser: {},
+    };
+    const dataAtual = new Date();
 
+    addDoc.mockResolvedValueOnce();
     getAuth.mockReturnValueOnce(mockAuth);
     await criandoPost(txt);
 
-    expect(doc).toHaveBeenCalledWith(undefined, 'posts');
-    doc.mockReturnValueOnce(mockDoc);
-    expect(mockAuth).toHaveBeenCalledTimes(1);
+    expect(addDoc).toHaveBeenCalledTimes(1);
+    expect(addDoc).toHaveBeenCalledWith(undefined, {
+      nome: mockAuth.currentUser.displayName,
+      autor: mockAuth.currentUser.uid,
+      texto: txt,
+      data: dataAtual,
+      like: [],
+    });
   });
 });

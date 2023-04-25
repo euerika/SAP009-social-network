@@ -50,8 +50,8 @@ export function deslogar() {
   signOut(auth);
 }
 
-function converterDataPost() {
-  const dataConvertida = new Date().toLocaleDateString();
+function converterDataPost(data) {
+  const dataConvertida = data.toDate().toLocaleDateString('pt-BR');
   return dataConvertida;
 }
 
@@ -63,29 +63,25 @@ export async function pegarPosts() {
   const posts = [];
   querySnapshot.forEach((doc) => {
     const dados = doc.data();
-    dados.data = converterDataPost();
+    dados.data = converterDataPost(dados.data);
     posts.push({ id: doc.id, ...dados });
   });
   return posts;
 }
 // função para adicionar itens no banco
 export async function criandoPost(txt) {
-  try {
-    const postRef = collection(db, 'posts');
+  const postRef = collection(db, 'posts');
+  const auth = getAuth(firebaseApp);
 
-    const dataAtual = new Date();
+  const dataAtual = new Date();
 
-    const postagem = await addDoc(postRef, {
-      nome: auth.currentUser.displayName,
-      autor: auth.currentUser.uid,
-      texto: txt,
-      data: dataAtual,
-      like: [],
-    });
-    console.error('Documento criado com ID: ', postagem.id);
-  } catch (e) {
-    console.error('Erro ao adicionar um documento', e);
-  }
+  await addDoc(postRef, {
+    nome: auth.currentUser.displayName,
+    autor: auth.currentUser.uid,
+    texto: txt,
+    data: dataAtual,
+    like: [],
+  });
 }
 
 // função dar like

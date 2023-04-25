@@ -1,14 +1,17 @@
 /* eslint-disable no-alert */
 import { loginUser, loginGoogle } from '../../lib/api.js';
+import logoImagem from '../../imagens/logoImagem.jpeg';
+import logo from '../../imagens/Logo.png.png';
+import google from '../../imagens/google.ico';
 
 export default () => {
   const container = document.createElement('div');
   const template = `  
     <p class='logo'>
-    <img id='logoImagem' src= 'imagens/logoImagem.jpeg' alt="imagem de um gatinho de óculos e um cachorrinho">
+    <img id='logoImagem' src= '${logoImagem}' alt="imagem de um gatinho de óculos e um cachorrinho">
     </p>
     <section class='flex-container'>
-    <img id='logo-insta' src='imagens/Logo.png.png' alt='imagem de um gatinho de óculos e um cachorrinho'>
+    <img id='logo-insta' src='${logo}' alt='imagem de um gatinho de óculos e um cachorrinho'>
     <div class= "vertical"></div> 
     <form class='form'>
     
@@ -31,7 +34,7 @@ export default () => {
     <section class='buttons'>
       <div id="linhaHor1"></div>
     
-      <button onClick={actionLoginGoogle} id='googleButton'><img class="google-icon" src="imagens/google.ico" alt="google-icon">Google</button>
+      <button onClick={actionLoginGoogle} id='googleButton'><img class="google-icon" src="${google}" alt="google-icon">Google</button>
      
       <div id="linhaHor2"></div>
     </section>
