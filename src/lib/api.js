@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-shadow */
 /* eslint-disable no-alert */
 import {
   getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged,
@@ -5,9 +7,9 @@ import {
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import {
-  getFirestore, collection, getDocs, addDoc, query, updateDoc, doc, deleteDoc, 
-
-  arrayUnion, arrayRemove } from 'firebase/firestore';
+  getFirestore, collection, getDocs, addDoc, query, updateDoc, doc, deleteDoc,
+  arrayUnion, arrayRemove,
+} from 'firebase/firestore';
 import firebaseConfig from './firebaseConfig';
 
 const firebaseApp = initializeApp(firebaseConfig);
@@ -15,9 +17,9 @@ export const auth = getAuth(firebaseApp);
 
 const db = getFirestore(firebaseApp);
 
-
 //  função para criar cadastro
 export function cadastrar(name, email, senha) {
+  const auth = getAuth(firebaseApp);
   return createUserWithEmailAndPassword(auth, email, senha)
     .then(() => updateProfile(auth.currentUser, {
       displayName: name,
@@ -26,6 +28,7 @@ export function cadastrar(name, email, senha) {
 
 // função de login do usuário
 export function loginUser(email, senha) {
+  const auth = getAuth(firebaseApp);
   return signInWithEmailAndPassword(auth, email, senha);
 }
 
@@ -33,12 +36,7 @@ export function loginUser(email, senha) {
 export function loginGoogle() {
   const provider = new GoogleAuthProvider();
 
-  return signInWithPopup(auth, provider)
-    .then(() => {
-
-    }).catch(() => {
-
-    });
+  return signInWithPopup(auth, provider);
 }
 
 // função manter logado
@@ -48,18 +46,16 @@ export function mantemLogado(callback) {
 
 // função deslogar
 export function deslogar() {
-  signOut(auth)
-    .then(() => {
-    })
-    .catch(() => {
-    });
+  const auth = getAuth();
+  signOut(auth);
 }
 
-function converterDataPost() {
-  const dataConvertida = new Date().toLocaleDateString();
+function converterDataPost(data) {
+  const dataConvertida = data.toDate().toLocaleDateString('pt-BR');
   return dataConvertida;
 }
 
+// função printa a postagem na tela
 export async function pegarPosts() {
   const q = query(collection(db, 'posts'));
 
@@ -67,41 +63,39 @@ export async function pegarPosts() {
   const posts = [];
   querySnapshot.forEach((doc) => {
     const dados = doc.data();
-    dados.data = converterDataPost();
+    dados.data = converterDataPost(dados.data);
     posts.push({ id: doc.id, ...dados });
   });
   return posts;
 }
 // função para adicionar itens no banco
 export async function criandoPost(txt) {
-  try {
-    const postRef = collection(db, 'posts');
+  const postRef = collection(db, 'posts');
+  const auth = getAuth(firebaseApp);
 
-    const dataAtual = new Date();
+  const dataAtual = new Date()
 
-    const postagem = await addDoc(postRef, {
-      // photo: auth.currentUser.photoURL
-      nome: auth.currentUser.displayName,
-      autor: auth.currentUser.uid,
-      texto: txt,
-      data: dataAtual,
-      like: [],
-    });
-    console.log('Document written with ID: ', postagem.id);
-  } catch (e) {
-    console.error('Error adding document: ', e);
-  }
+  await addDoc(postRef, {
+    nome: auth.currentUser.displayName,
+    autor: auth.currentUser.uid,
+    texto: txt,
+    data: dataAtual,
+    like: [],
+  });
 }
 
 // função dar like
 export async function likePost(postId) {
+  const auth = getAuth(firebaseApp);
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
     like: arrayUnion(auth.currentUser.uid),
   });
 }
 
+// função dar deslike
 export async function deslikePost(postId) {
+  const auth = getAuth(firebaseApp);
   const docRef = doc(db, 'posts', postId);
   await updateDoc(docRef, {
     like: arrayRemove(auth.currentUser.uid),
@@ -119,6 +113,5 @@ export async function editarPost(postId, textEdit) {
 
 // função para deletar o post
 export async function deletarPost(postId) {
-  console.log(postId);
   await deleteDoc(doc(db, 'posts', postId));
 }

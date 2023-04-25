@@ -1,4 +1,4 @@
-// import { async } from 'regenerator-runtime';
+/* eslint-disable no-alert */
 import {
   deletarPost,
   likePost,
@@ -8,10 +8,7 @@ import {
 } from '../lib/api.js';
 
 export default (posts) => {
-  console.log(posts);
   const container = document.createElement('div');
-  // setAttribute() adiciona um novo atributo ou modifica o valor de um
-  // atributo existente num elemento específico
   container.setAttribute('class', 'posts');
   const template = posts.map((post) => `
       <div class="post">
@@ -51,6 +48,7 @@ export default (posts) => {
   const btnEditar = document.querySelectorAll('.btn-editar');
   const btnDeletar = document.querySelectorAll('.btn-deletar');
 
+  // like
   btnLike.forEach((element) => {
     element.addEventListener('click', (e) => {
       const postId = e.target.dataset.id;
@@ -59,11 +57,12 @@ export default (posts) => {
         .then(() => {
           document.location.reload(true);
         }).catch(() => {
-          console.log('deu ruim');
+          alert('Algo deu errado na sua solicitação. Tente novamente em instantes.');
         });
     });
   });
 
+  // deslike
   btnDeslike.forEach((element) => {
     element.addEventListener('click', (e) => {
       const postId = e.target.dataset.id;
@@ -72,38 +71,10 @@ export default (posts) => {
         .then(() => {
           document.location.reload(true);
         }).catch(() => {
-          console.log('deu ruim');
+          alert('Algo deu errado na sua solicitação. Tente novamente em instantes.');
         });
     });
   });
-
-  btnDeslike.forEach((element) => {
-    element.addEventListener('click', (e) => {
-      const postId = e.target.dataset.id;
-
-      deslikePost(postId, 1)
-
-        .then(() => {
-          document.location.reload(true);
-        }).catch(() => {
-          console.log('deu ruim');
-        });
-      
-    });
-  });
-
-  // btnLike.forEach((element) => {
-  //   element.addEventListener('click', (e) => {
-  //     const postId = e.target.dataset.id;
-
-  //     deslikePost(postId)
-  //       .then(() => {
-  //         document.location.reload(true);
-  //       }).catch(() => {
-  //         console.log('deu ruim');
-  //       });
-  //   });
-  // });
 
   // editar
   btnEditar.forEach((element) => {
@@ -115,7 +86,7 @@ export default (posts) => {
         .then(() => {
           document.location.reload(true);
         }).catch(() => {
-          console.log('Não foi possível editar o seu post, tente novamente.');
+          alert('Não foi possível editar o seu post, tente novamente.');
         });
     });
   });
