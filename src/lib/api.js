@@ -73,7 +73,7 @@ export async function criandoPost(txt) {
   const postRef = collection(db, 'posts');
   const auth = getAuth(firebaseApp);
 
-  const dataAtual = new Date();
+  const dataAtual = new Date()
 
   await addDoc(postRef, {
     nome: auth.currentUser.displayName,
