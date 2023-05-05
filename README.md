@@ -12,7 +12,7 @@
 
 ## 1. Sobre o projeto
 
-Criamos o projeto da rede social Insta Pet's vizando acolher as pessoas que têm animais de estimação e desejam compartilhar suas rotinas, tirar dúvidas com pessoas que têm em casa animais da mesma espécie ou mesma raça. Através da rede social é possível fazer login com e-mail e senha, com a conta Google do usuário, logout, criar, editar e excluir as postagens de textos.
+Criamos o projeto da rede social Insta Pet's visando acolher as pessoas que têm animais de estimação e desejam compartilhar suas rotinas, tirar dúvidas com pessoas que têm em casa animais da mesma espécie ou mesma raça. Através da rede social é possível fazer login com e-mail e senha, com a conta Google do usuário, logout, criar, editar e excluir as postagens de textos.
 Mais adiante existem planos de que seja possível fazer postagens com imagens e adicionar fotos aos perfis de usuários.
 
 ## 2. Histórias de usuários
