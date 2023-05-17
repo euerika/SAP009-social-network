@@ -2,13 +2,13 @@
 
 ## Insta Pet's
 
-* [1. Sobre o projeto](#1-Sobre o projeto)
-* [2. Histórias de usuários](#2-Histórias de usuários)
+* [1. Sobre o projeto](#1-Sobre-o-projeto)
+* [2. Histórias de usuários](#2-Histórias-de-usuários)
 * [3. Criação (protótipos)](#3-Criação-protótipos)
-* [4. Testes Unitários](#4-Testes Unitários)
+* [4. Testes Unitários](#4-Testes-Unitários)
 * [5. Técnicas e técnologias utilizadas](#5-Técnicas-e-técnologias-utilizadas)
-* [6. Pessoas desenvolvedoras](#6-Pessoas desenvolvedoras)
-* [7. Link de acesso ao site](#7-Link de acesso ao site)
+* [6. Pessoas desenvolvedoras](#6-Pessoas-desenvolvedoras)
+* [7. Link de acesso ao site](#7-Link-de-acesso-ao-site)
 
 ## 1. Sobre o projeto
 
